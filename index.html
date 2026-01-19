@@ -3,177 +3,697 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Bot - أوامر البوت</title>
+    <title>Venzo Bot Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.min.css">
 </head>
 <body>
-    <!-- شريط التنقل -->
-    <header class="header">
-        <div class="container">
-            <div class="logo">
+    <!-- القائمة الجانبية -->
+    <nav class="sidebar">
+        <!-- رأس القائمة -->
+        <div class="sidebar-header">
+            <div class="bot-logo">
                 <i class="fas fa-robot"></i>
-                <h1>Nova Bot</h1>
+                <div class="online-indicator"></div>
             </div>
-            <nav class="nav">
-                <a href="#" class="nav-link active">الأوامر</a>
-                <a href="#" class="nav-link">الإضافات</a>
-                <a href="#" class="nav-link">الدعم</a>
-                <a href="#" class="btn invite-btn">دعوة البوت</a>
-            </nav>
-            <button class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
+            <h2>Venzo Bot</h2>
+            <span class="bot-status online">
+                <i class="fas fa-circle"></i> Online
+            </span>
         </div>
-    </header>
+
+        <!-- قائمة التنقل -->
+        <ul class="sidebar-nav">
+            <!-- القسم 1 -->
+            <li class="nav-category">General</li>
+            <li class="nav-item active" data-page="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+                <span class="nav-badge">الرئيسية</span>
+            </li>
+            
+            <!-- القسم 2 -->
+            <li class="nav-category">Bot Profile</li>
+            <li class="nav-item" data-page="profile">
+                <i class="fas fa-user-edit"></i>
+                <span>Edit Profile</span>
+                <span class="nav-badge new">جديد</span>
+            </li>
+            
+            <!-- القسم 3 -->
+            <li class="nav-category">Settings</li>
+            <li class="nav-item" data-page="settings">
+                <i class="fas fa-cog"></i>
+                <span>Bot Settings</span>
+            </li>
+            
+            <!-- القسم 4 -->
+            <li class="nav-category">Statistics</li>
+            <li class="nav-item" data-page="statistics">
+                <i class="fas fa-chart-line"></i>
+                <span>Analytics</span>
+            </li>
+            
+            <!-- القسم 5 -->
+            <li class="nav-category">Embed & Messages</li>
+            <li class="nav-item" data-page="embeds">
+                <i class="fas fa-envelope"></i>
+                <span>Embed Messages</span>
+                <button class="new-embed-btn" id="newEmbedBtn">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </li>
+            
+            <!-- قسم إضافي -->
+            <li class="nav-category">Moderation</li>
+            <li class="nav-item" data-page="moderation">
+                <i class="fas fa-shield-alt"></i>
+                <span>Moderation Tools</span>
+                <span class="nav-badge">10</span>
+            </li>
+            
+            <!-- قسم إضافي -->
+            <li class="nav-category">Fun & Games</li>
+            <li class="nav-item" data-page="games">
+                <i class="fas fa-gamepad"></i>
+                <span>Games & Fun</span>
+            </li>
+            
+            <!-- قسم إضافي -->
+            <li class="nav-category">Music</li>
+            <li class="nav-item" data-page="music">
+                <i class="fas fa-music"></i>
+                <span>Music Player</span>
+            </li>
+            
+            <!-- قسم إضافي -->
+            <li class="nav-category">Economy</li>
+            <li class="nav-item" data-page="economy">
+                <i class="fas fa-coins"></i>
+                <span>Economy System</span>
+            </li>
+        </ul>
+
+        <!-- معلومات السيرفر -->
+        <div class="server-info">
+            <div class="server-card">
+                <div class="server-avatar">
+                    <img src="https://cdn.discordapp.com/icons/123456789012345678/abcdefghijklmnop.png" alt="Server Icon">
+                </div>
+                <div class="server-details">
+                    <h4>Venzo Community</h4>
+                    <p>1,250 members</p>
+                </div>
+                <i class="fas fa-chevron-down server-dropdown"></i>
+            </div>
+            <div class="server-stats">
+                <div class="stat">
+                    <i class="fas fa-comment"></i>
+                    <span>24K messages</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-users"></i>
+                    <span>Active</span>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <!-- المحتوى الرئيسي -->
-    <main class="main">
-        <div class="container">
-            <!-- قسم العنوان -->
-            <section class="hero">
-                <h2><i class="fas fa-tools"></i> Utility</h2>
-                <p>Contains various general commands for common tasks and server information.</p>
+    <main class="main-content">
+        <!-- شريط التنقل العلوي -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search commands, users, settings...">
+                </div>
+            </div>
+            <div class="topbar-right">
+                <div class="user-menu">
+                    <div class="user-avatar">
+                        <img src="https://cdn.discordapp.com/avatars/123456789012345678/abcdefghijklmnop.png" alt="User Avatar">
+                    </div>
+                    <span class="username">Venzo Admin</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- محتوى الصفحات -->
+        <div class="page-content">
+            
+            <!-- صفحة Dashboard -->
+            <section class="page active" id="dashboard">
+                <div class="page-header">
+                    <h1><i class="fas fa-home"></i> Dashboard</h1>
+                    <p>Welcome to Venzo Bot Control Panel</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>24,589</h3>
+                            <p>Total Messages</p>
+                        </div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 12%
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>1,250</h3>
+                            <p>Server Members</p>
+                        </div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 5%
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>98.7%</h3>
+                            <p>Uptime</p>
+                        </div>
+                        <div class="stat-change negative">
+                            <i class="fas fa-arrow-down"></i> 0.3%
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>42</h3>
+                            <p>Active Commands</p>
+                        </div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 8%
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="recent-commands">
+                        <h2><i class="fas fa-history"></i> Recent Commands</h2>
+                        <div class="commands-list">
+                            <div class="command-item">
+                                <div class="command-icon">
+                                    <i class="fas fa-music"></i>
+                                </div>
+                                <div class="command-details">
+                                    <h4>/play song</h4>
+                                    <p>User: Ahmed#1234</p>
+                                </div>
+                                <span class="command-time">2 min ago</span>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-icon">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <div class="command-details">
+                                    <h4>/daily</h4>
+                                    <p>User: Sara#5678</p>
+                                </div>
+                                <span class="command-time">5 min ago</span>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="command-details">
+                                    <h4>/warn @user</h4>
+                                    <p>User: Admin#9012</p>
+                                </div>
+                                <span class="command-time">10 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+                        <div class="actions-grid">
+                            <button class="action-btn purple">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </button>
+                            <button class="action-btn blue">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Analytics</span>
+                            </button>
+                            <button class="action-btn green">
+                                <i class="fas fa-envelope"></i>
+                                <span>Send Message</span>
+                            </button>
+                            <button class="action-btn orange">
+                                <i class="fas fa-robot"></i>
+                                <span>Bot Status</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <!-- الأوامر -->
-            <section class="commands">
-                <div class="commands-header">
-                    <h3>COMMANDS</h3>
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="ابحث عن أمر...">
+            <!-- صفحة Edit Profile -->
+            <section class="page" id="profile">
+                <div class="page-header">
+                    <h1><i class="fas fa-user-edit"></i> Edit Bot Profile</h1>
+                    <p>Customize your bot's appearance and identity</p>
+                </div>
+                
+                <div class="profile-editor">
+                    <div class="profile-preview">
+                        <div class="profile-header">
+                            <div class="profile-avatar">
+                                <img src="https://cdn.discordapp.com/avatars/123456789012345678/abcdefghijklmnop.png" alt="Bot Avatar" id="botAvatarPreview">
+                                <button class="change-avatar-btn">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                            </div>
+                            <div class="profile-info">
+                                <h2 id="botNamePreview">Venzo Bot</h2>
+                                <span class="status-selector">
+                                    <select id="botStatus">
+                                        <option value="online">🟢 Online</option>
+                                        <option value="idle">🟡 Idle</option>
+                                        <option value="dnd">🔴 Do Not Disturb</option>
+                                        <option value="offline">⚫ Offline</option>
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-banner">
+                            <div class="banner-preview" id="bannerPreview">
+                                <div class="banner-overlay">
+                                    <button class="change-banner-btn">
+                                        <i class="fas fa-image"></i> Change Banner
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-details">
+                            <div class="detail-item">
+                                <i class="fas fa-hashtag"></i>
+                                <span>Bot ID: 123456789012345678</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar"></i>
+                                <span>Created: January 15, 2023</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-code"></i>
+                                <span>Version: 2.4.1</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-form">
+                        <div class="form-group">
+                            <label for="botName">
+                                <i class="fas fa-font"></i> Bot Username
+                            </label>
+                            <input type="text" id="botName" value="Venzo Bot" placeholder="Enter bot username">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="botPrefix">
+                                <i class="fas fa-terminal"></i> Command Prefix
+                            </label>
+                            <input type="text" id="botPrefix" value="!" placeholder="Enter command prefix">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="botBio">
+                                <i class="fas fa-file-alt"></i> Bot Description
+                            </label>
+                            <textarea id="botBio" rows="4" placeholder="Enter bot description">A powerful Discord bot with moderation, music, games, and more!</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <i class="fas fa-palette"></i> Bot Color Theme
+                            </label>
+                            <div class="color-picker">
+                                <button class="color-option purple active" data-color="#8a2be2"></button>
+                                <button class="color-option blue" data-color="#5865F2"></button>
+                                <button class="color-option green" data-color="#57F287"></button>
+                                <button class="color-option red" data-color="#ED4245"></button>
+                                <button class="color-option orange" data-color="#FAA81A"></button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="commands-grid">
-                    <!-- أمر 1 -->
-                    <div class="command-card">
-                        <div class="command-icon">
-                            <i class="fas fa-server"></i>
+            <!-- صفحة Settings -->
+            <section class="page" id="settings">
+                <div class="page-header">
+                    <h1><i class="fas fa-cog"></i> Bot Settings</h1>
+                    <p>Configure bot behavior and preferences</p>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3><i class="fas fa-power-off"></i> Bot Status</h3>
+                        <div class="toggle-group">
+                            <span>Bot Active Status</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
                         </div>
-                        <div class="command-info">
-                            <h4>server</h4>
-                            <p>View server information</p>
-                            <div class="command-tags">
-                                <span class="tag">🔑</span>
-                                <span class="tag">🔍</span>
+                        <p class="setting-desc">Enable or disable the bot's functionality</p>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3><i class="fas fa-language"></i> Language</h3>
+                        <div class="language-selector">
+                            <select>
+                                <option value="en">🌐 English</option>
+                                <option value="ar" selected>🇸🇦 العربية</option>
+                                <option value="fr">🇫🇷 Français</option>
+                                <option value="es">🇪🇸 Español</option>
+                                <option value="de">🇩🇪 Deutsch</option>
+                            </select>
+                        </div>
+                        <p class="setting-desc">Select bot response language</p>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3><i class="fas fa-bell"></i> Notifications</h3>
+                        <div class="toggle-group">
+                            <span>Join/Leave Messages</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="toggle-group">
+                            <span>Command Logs</span>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3><i class="fas fa-shield-alt"></i> Security</h3>
+                        <div class="toggle-group">
+                            <span>Anti-Spam Protection</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="toggle-group">
+                            <span>Auto-Moderation</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3><i class="fas fa-music"></i> Music Settings</h3>
+                        <div class="toggle-group">
+                            <span>24/7 Music</span>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="toggle-group">
+                            <span>Auto-play</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3><i class="fas fa-gamepad"></i> Games Settings</h3>
+                        <div class="toggle-group">
+                            <span>Economy System</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="toggle-group">
+                            <span>Leveling System</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- صفحة Statistics -->
+            <section class="page" id="statistics">
+                <div class="page-header">
+                    <h1><i class="fas fa-chart-line"></i> Analytics & Statistics</h1>
+                    <p>Track your bot's performance and usage</p>
+                </div>
+                
+                <div class="stats-container">
+                    <div class="chart-container">
+                        <h3><i class="fas fa-comment-dots"></i> Messages per Day</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="messagesChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3><i class="fas fa-users"></i> Event Participation</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="eventsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detailed-stats">
+                    <div class="stat-box">
+                        <h4><i class="fas fa-calendar"></i> Daily Statistics</h4>
+                        <div class="stat-list">
+                            <div class="stat-item">
+                                <span>Messages Today</span>
+                                <span class="stat-value">1,248</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>Active Users</span>
+                                <span class="stat-value">312</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>Commands Used</span>
+                                <span class="stat-value">589</span>
                             </div>
                         </div>
                     </div>
-
-                    <!-- أمر 2 -->
-                    <div class="command-card">
-                        <div class="command-icon">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="command-info">
-                            <h4>avatar</h4>
-                            <p>View a member's or a server's avatar</p>
-                            <div class="command-tags">
-                                <span class="tag">🔑</span>
-                                <span class="tag">🔍</span>
-                            </div>
+                    
+                    <div class="stat-box">
+                        <h4><i class="fas fa-chart-pie"></i> Command Distribution</h4>
+                        <div class="pie-chart">
+                            <canvas id="commandsChart"></canvas>
                         </div>
                     </div>
-
-                    <!-- أمر 3 -->
-                    <div class="command-card">
-                        <div class="command-icon">
-                            <i class="fas fa-question-circle"></i>
-                        </div>
-                        <div class="command-info">
-                            <h4>help</h4>
-                            <p>See information about the bot</p>
-                            <div class="command-tags">
-                                <span class="tag">🔑</span>
+                    
+                    <div class="stat-box">
+                        <h4><i class="fas fa-trophy"></i> Top Commands</h4>
+                        <div class="top-commands">
+                            <div class="top-command">
+                                <span>1. /play</span>
+                                <span class="usage">2,458 uses</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- أمر 4 -->
-                    <div class="command-card">
-                        <div class="command-icon">
-                            <i class="fas fa-list-ul"></i>
-                        </div>
-                        <div class="command-info">
-                            <h4>commands</h4>
-                            <p>List of all commands provided by Nova Bot</p>
-                            <div class="command-tags">
-                                <span class="tag">🔑</span>
+                            <div class="top-command">
+                                <span>2. /help</span>
+                                <span class="usage">1,892 uses</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- أمر 5 -->
-                    <div class="command-card">
-                        <div class="command-icon">
-                            <i class="fas fa-sliders-h"></i>
-                        </div>
-                        <div class="command-info">
-                            <h4>dashboard</h4>
-                            <p>Manage Nova's settings and customize features for your server</p>
-                            <div class="command-tags">
-                                <span class="tag">🔑</span>
+                            <div class="top-command">
+                                <span>3. /ping</span>
+                                <span class="usage">1,543 uses</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- أمر 6 -->
-                    <div class="command-card">
-                        <div class="command-icon">
-                            <i class="fas fa-image"></i>
-                        </div>
-                        <div class="command-info">
-                            <h4>banner</h4>
-                            <p>View a member's or a server's banner</p>
-                            <div class="command-tags">
-                                <span class="tag">🔑</span>
-                                <span class="tag">🔍</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- أمر 7 -->
-                    <div class="command-card">
-                        <div class="command-icon">
-                            <i class="fas fa-bug"></i>
-                        </div>
-                        <div class="command-info">
-                            <h4>debug</h4>
-                            <p>Send information about the bot in this guild</p>
-                            <div class="command-tags">
-                                <span class="tag">🔑</span>
-                                <span class="tag">🔍</span>
+                            <div class="top-command">
+                                <span>4. /daily</span>
+                                <span class="usage">1,234 uses</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- معلومات إضافية -->
-            <section class="info">
-                <div class="info-card">
-                    <h4><i class="fas fa-info-circle"></i> معاني الرموز</h4>
-                    <ul>
-                        <li><span class="symbol">🔑</span> تحتاج إلى صلاحيات خاصة</li>
-                        <li><span class="symbol">🔍</span> يحتوي على خيارات بحث</li>
-                    </ul>
+            <!-- صفحة Embed Messages -->
+            <section class="page" id="embeds">
+                <div class="page-header">
+                    <h1><i class="fas fa-envelope"></i> Embed Messages</h1>
+                    <p>Create and customize beautiful Discord embeds</p>
                 </div>
-                <div class="info-card">
-                    <h4><i class="fas fa-bolt"></i> إحصائيات سريعة</h4>
-                    <div class="stats">
-                        <div class="stat">
-                            <span class="stat-number">7</span>
-                            <span class="stat-label">أوامر</span>
+                
+                <div class="embeds-container">
+                    <!-- قائمة Embeds المحفوظة -->
+                    <div class="saved-embeds">
+                        <h3><i class="fas fa-bookmark"></i> Saved Embeds</h3>
+                        <div class="embeds-list">
+                            <div class="embed-item">
+                                <div class="embed-preview-small purple">
+                                    <h4>Welcome Message</h4>
+                                    <p>Embed description here...</p>
+                                </div>
+                                <div class="embed-actions">
+                                    <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="embed-item">
+                                <div class="embed-preview-small blue">
+                                    <h4>Rules Embed</h4>
+                                    <p>Server rules and guidelines</p>
+                                </div>
+                                <div class="embed-actions">
+                                    <button class="btn-edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-delete"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number">24/7</span>
-                            <span class="stat-label">متاح</span>
+                        
+                        <button class="btn-new-embed" id="createNewEmbed">
+                            <i class="fas fa-plus"></i> Create New Embed
+                        </button>
+                    </div>
+                    
+                    <!-- منشئ Embed -->
+                    <div class="embed-builder" id="embedBuilder">
+                        <div class="embed-preview" id="embedPreview">
+                            <!-- ستتم إضافة محتوى الـ Embed هنا ديناميكياً -->
                         </div>
-                        <div class="stat">
-                            <span class="stat-number">98%</span>
-                            <span class="stat-label">وقت تشغيل</span>
+                        
+                        <div class="embed-editor">
+                            <h3><i class="fas fa-edit"></i> Embed Editor</h3>
+                            
+                            <div class="editor-tabs">
+                                <button class="tab-btn active" data-tab="content">Content</button>
+                                <button class="tab-btn" data-tab="appearance">Appearance</button>
+                                <button class="tab-btn" data-tab="fields">Fields</button>
+                            </div>
+                            
+                            <div class="tab-content active" id="contentTab">
+                                <div class="form-group">
+                                    <label><i class="fas fa-heading"></i> Title</label>
+                                    <input type="text" id="embedTitle" placeholder="Embed title">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fas fa-align-left"></i> Description</label>
+                                    <textarea id="embedDesc" rows="3" placeholder="Embed description"></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fas fa-link"></i> URL</label>
+                                    <input type="url" id="embedUrl" placeholder="https://">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fas fa-image"></i> Thumbnail URL</label>
+                                    <input type="url" id="embedThumbnail" placeholder="Image URL">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fas fa-image"></i> Image URL</label>
+                                    <input type="url" id="embedImage" placeholder="Image URL">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fas fa-user"></i> Author</label>
+                                    <input type="text" id="embedAuthor" placeholder="Author name">
+                                </div>
+                            </div>
+                            
+                            <div class="tab-content" id="appearanceTab">
+                                <div class="form-group">
+                                    <label><i class="fas fa-palette"></i> Color</label>
+                                    <input type="color" id="embedColor" value="#8a2be2">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fas fa-font"></i> Footer Text</label>
+                                    <input type="text" id="embedFooter" placeholder="Footer text">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label><i class="fas fa-clock"></i> Timestamp</label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="embedTimestamp">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-content" id="fieldsTab">
+                                <div class="fields-container" id="fieldsContainer">
+                                    <!-- سيتم إضافة الحقول هنا -->
+                                </div>
+                                <button class="btn-add-field" id="addFieldBtn">
+                                    <i class="fas fa-plus"></i> Add Field
+                                </button>
+                            </div>
+                            
+                            <div class="send-embed-section">
+                                <h4><i class="fas fa-paper-plane"></i> Send Embed To</h4>
+                                <div class="channel-selector">
+                                    <select id="channelSelect">
+                                        <option value="">Select a channel</option>
+                                        <option value="general">#general</option>
+                                        <option value="announcements">#announcements</option>
+                                        <option value="welcome">#welcome</option>
+                                    </select>
+                                </div>
+                                <div class="send-actions">
+                                    <button class="btn btn-secondary">
+                                        <i class="fas fa-save"></i> Save
+                                    </button>
+                                    <button class="btn btn-primary" id="sendEmbedBtn">
+                                        <i class="fas fa-paper-plane"></i> Send Embed
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -181,71 +701,42 @@
         </div>
     </main>
 
-    <!-- التذييل -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Nova Bot</h4>
-                    <p>بوت ديسكورد متعدد الوظائف</p>
-                </div>
-                <div class="footer-section">
-                    <h4>روابط سريعة</h4>
-                    <a href="#"><i class="fab fa-discord"></i> سيرفر الدعم</a>
-                    <a href="#"><i class="fas fa-book"></i> الوثائق</a>
-                </div>
-                <div class="footer-section">
-                    <h4>التواصل</h4>
-                    <div class="social">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                    </div>
+    <!-- Modal إنشاء Embed جديد -->
+    <div class="modal" id="embedModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus-circle"></i> Create New Embed</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Choose embed type:</p>
+                <div class="embed-types">
+                    <button class="embed-type-btn" data-type="basic">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Basic Embed</span>
+                    </button>
+                    <button class="embed-type-btn" data-type="welcome">
+                        <i class="fas fa-door-open"></i>
+                        <span>Welcome Embed</span>
+                    </button>
+                    <button class="embed-type-btn" data-type="announcement">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Announcement</span>
+                    </button>
+                    <button class="embed-type-btn" data-type="rules">
+                        <i class="fas fa-gavel"></i>
+                        <span>Rules Embed</span>
+                    </button>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2023 Nova Bot. جميع الحقوق محفوظة.</p>
+            <div class="modal-footer">
+                <button class="btn btn-secondary close-modal">Cancel</button>
+                <button class="btn btn-primary" id="confirmCreate">Create</button>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <script>
-        // وظائف JavaScript بسيطة
-        document.addEventListener('DOMContentLoaded', function() {
-            // تبديل القائمة على الهواتف
-            const menuToggle = document.querySelector('.menu-toggle');
-            const nav = document.querySelector('.nav');
-            
-            menuToggle.addEventListener('click', function() {
-                nav.classList.toggle('active');
-            });
-            
-            // البحث في الأوامر
-            const searchInput = document.querySelector('.search-box input');
-            const commandCards = document.querySelectorAll('.command-card');
-            
-            searchInput.addEventListener('input', function(e) {
-                const searchTerm = e.target.value.toLowerCase();
-                
-                commandCards.forEach(card => {
-                    const commandName = card.querySelector('h4').textContent.toLowerCase();
-                    const description = card.querySelector('p').textContent.toLowerCase();
-                    
-                    if (commandName.includes(searchTerm) || description.includes(searchTerm)) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-            
-            // تأثير عند النقر على الأوامر
-            commandCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    const commandName = this.querySelector('h4').textContent;
-                    alert(`تم النقر على الأمر: ${commandName}`);
-                });
-            });
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
