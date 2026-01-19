@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Bot - أوامر البوت</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>Nova Bot</h1>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link active">الأوامر</a>
+                <a href="#" class="nav-link">الإضافات</a>
+                <a href="#" class="nav-link">الدعم</a>
+                <a href="#" class="btn invite-btn">دعوة البوت</a>
+            </nav>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="main">
+        <div class="container">
+            <!-- قسم العنوان -->
+            <section class="hero">
+                <h2><i class="fas fa-tools"></i> Utility</h2>
+                <p>Contains various general commands for common tasks and server information.</p>
+            </section>
+
+            <!-- الأوامر -->
+            <section class="commands">
+                <div class="commands-header">
+                    <h3>COMMANDS</h3>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="ابحث عن أمر...">
+                    </div>
+                </div>
+
+                <div class="commands-grid">
+                    <!-- أمر 1 -->
+                    <div class="command-card">
+                        <div class="command-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="command-info">
+                            <h4>server</h4>
+                            <p>View server information</p>
+                            <div class="command-tags">
+                                <span class="tag">🔑</span>
+                                <span class="tag">🔍</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- أمر 2 -->
+                    <div class="command-card">
+                        <div class="command-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="command-info">
+                            <h4>avatar</h4>
+                            <p>View a member's or a server's avatar</p>
+                            <div class="command-tags">
+                                <span class="tag">🔑</span>
+                                <span class="tag">🔍</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- أمر 3 -->
+                    <div class="command-card">
+                        <div class="command-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="command-info">
+                            <h4>help</h4>
+                            <p>See information about the bot</p>
+                            <div class="command-tags">
+                                <span class="tag">🔑</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- أمر 4 -->
+                    <div class="command-card">
+                        <div class="command-icon">
+                            <i class="fas fa-list-ul"></i>
+                        </div>
+                        <div class="command-info">
+                            <h4>commands</h4>
+                            <p>List of all commands provided by Nova Bot</p>
+                            <div class="command-tags">
+                                <span class="tag">🔑</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- أمر 5 -->
+                    <div class="command-card">
+                        <div class="command-icon">
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <div class="command-info">
+                            <h4>dashboard</h4>
+                            <p>Manage Nova's settings and customize features for your server</p>
+                            <div class="command-tags">
+                                <span class="tag">🔑</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- أمر 6 -->
+                    <div class="command-card">
+                        <div class="command-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="command-info">
+                            <h4>banner</h4>
+                            <p>View a member's or a server's banner</p>
+                            <div class="command-tags">
+                                <span class="tag">🔑</span>
+                                <span class="tag">🔍</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- أمر 7 -->
+                    <div class="command-card">
+                        <div class="command-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <div class="command-info">
+                            <h4>debug</h4>
+                            <p>Send information about the bot in this guild</p>
+                            <div class="command-tags">
+                                <span class="tag">🔑</span>
+                                <span class="tag">🔍</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- معلومات إضافية -->
+            <section class="info">
+                <div class="info-card">
+                    <h4><i class="fas fa-info-circle"></i> معاني الرموز</h4>
+                    <ul>
+                        <li><span class="symbol">🔑</span> تحتاج إلى صلاحيات خاصة</li>
+                        <li><span class="symbol">🔍</span> يحتوي على خيارات بحث</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4><i class="fas fa-bolt"></i> إحصائيات سريعة</h4>
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="stat-number">7</span>
+                            <span class="stat-label">أوامر</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">متاح</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-label">وقت تشغيل</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Nova Bot</h4>
+                    <p>بوت ديسكورد متعدد الوظائف</p>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <a href="#"><i class="fab fa-discord"></i> سيرفر الدعم</a>
+                    <a href="#"><i class="fas fa-book"></i> الوثائق</a>
+                </div>
+                <div class="footer-section">
+                    <h4>التواصل</h4>
+                    <div class="social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 Nova Bot. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // وظائف JavaScript بسيطة
+        document.addEventListener('DOMContentLoaded', function() {
+            // تبديل القائمة على الهواتف
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.nav');
+            
+            menuToggle.addEventListener('click', function() {
+                nav.classList.toggle('active');
+            });
+            
+            // البحث في الأوامر
+            const searchInput = document.querySelector('.search-box input');
+            const commandCards = document.querySelectorAll('.command-card');
+            
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                
+                commandCards.forEach(card => {
+                    const commandName = card.querySelector('h4').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (commandName.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // تأثير عند النقر على الأوامر
+            commandCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const commandName = this.querySelector('h4').textContent;
+                    alert(`تم النقر على الأمر: ${commandName}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
